@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Contato — Gustavo Starling</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;700&family=IBM+Plex+Sans:wght@400;500&display=swap">
+<link rel="stylesheet" href="css/style.css">
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+</head>
+<body id="ovflow">
+<div class="shell">
+  <site-nav></site-nav>
+  <div id="mShell">
+    <canvas id="hero-canvas"></canvas>
+    <main>
+      <h1 data-pt>Contato</h1>
+      <h1 data-en>Contact</h1>
+
+      <div class="contact-icons">
+        <a href="mailto:gustavoramos.starling@gmail.com">Email</a>
+        <a data-en href="https://wa.me/14702829222" target="_blank" rel="noopener">WhatsApp (US)</a>
+        <a data-pt href="https://wa.me/5531971101120" target="_blank" rel="noopener">WhatsApp (BR)</a>
+        <a href="https://www.linkedin.com/in/gustavostarling/" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="https://github.com/s7agv" target="_blank" rel="noopener">GitHub</a>
+      </div>
+
+      <form id="contact-form">
+        <div><label for="name" data-pt>Nome</label><label for="name" data-en>Name</label>
+          <input id="name" name="name" required></div>
+        <div><label for="email">Email</label>
+          <input id="email" name="email" type="email" required></div>
+        <div><label for="message" data-pt>Mensagem</label><label for="message" data-en>Message</label>
+          <textarea id="message" name="message" rows="5" required></textarea></div>
+        <button type="submit" data-pt>Enviar</button><button type="submit" data-en>Send</button>
+        <p id="form-status"></p>
+      </form>
+    </main>
+  </div>
+</div>
+<script src="js/nav.js"></script>
+<script type="module" src="js/hero3d.js"></script>
+<script>
+// TODO trocar pelos IDs reais da conta EmailJS (serviceID / templateID / publicKey)
+emailjs.init({ publicKey: 'SUA_PUBLIC_KEY' });
+document.getElementById('contact-form').addEventListener('submit', (e) => {
+  e.preventDefault();
+  const status = document.getElementById('form-status');
+  emailjs.sendForm('SEU_SERVICE_ID', 'SEU_TEMPLATE_ID', e.target)
+    .then(() => status.textContent = 'Mensagem enviada!')
+    .catch(() => status.textContent = 'Erro ao enviar, tente novamente.');
+});
+</script>
+</body>
+</html>

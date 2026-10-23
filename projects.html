@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Projetos — Gustavo Starling</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;700&family=IBM+Plex+Sans:wght@400;500&display=swap">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div class="shell">
+  <site-nav></site-nav>
+  <main>
+    <h1><span data-pt>Projetos</span><span data-en>Projects</span></h1>
+    <p class="lede" data-pt>Linha do tempo, do mais antigo ao mais recente.</p>
+    <p class="lede" data-en>Timeline, oldest to newest.</p>
+    <div class="timeline" id="timeline"></div>
+  </main>
+</div>
+<script src="js/nav.js"></script>
+<script src="js/projects-data.js"></script>
+<script>
+// renderiza a timeline a partir de PROJECTS (projects-data.js)
+document.getElementById('timeline').innerHTML = PROJECTS.map(p => `
+  <div class="t-item">
+    <h3>${p.name} <span class="tag">${p.year}</span></h3>
+    <img src="${p.img}" alt="${p.name}" style="max-width:100%;border:1px solid var(--border);border-radius:4px;margin:.5rem 0">
+    <p data-pt>${p.desc_pt}</p>
+    <p data-en>${p.desc_en}</p>
+    <div class="stack">${p.stack.map(s => `<span>${s}</span>`).join('')}</div>
+    <p><a href="${p.repo}" target="_blank" rel="noopener">GitHub →</a></p>
+  </div>`).join('');
+</script>
+</body>
+</html>
